@@ -64,11 +64,16 @@ namespace TypeScriptDefinitionGenerator
                 case "biginteger":
                     return js ? "Number" : "number";
 
-                case "datetime":
-                case "datetimeoffset":
-                case "system.datetime":
-                case "system.datetimeoffset":
+                case "datetime":                
+                case "system.datetime":                
                     return "Date";
+
+                // EnricoP
+                // I DateTimeOffset una volta serializzati in json devono essere stringhe.
+                // Stessa cosa quando invece fai una POST al server dove devi inviare sempre una stringa a livello di .d.ts
+                case "datetimeoffset":
+                case "system.datetimeoffset":
+                    return js ? "String" : "string";
 
                 case "string":
                     return js ? "String" : "string";
